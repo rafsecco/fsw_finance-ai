@@ -27,7 +27,7 @@ const MONTH_OPTIONS = [
 const TimeSelect = () => {
   const { push } = useRouter();
   const searchParams = useSearchParams();
-  const month = searchParams.get("month");
+  const month = searchParams.get("month")?.toString().padStart(2, "0");
   const handleMonthChange = (month: string) => {
     push(`/?month=${month}`);
   };

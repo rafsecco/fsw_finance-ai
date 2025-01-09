@@ -5,6 +5,7 @@ import OpenAI from "openai";
 import { generateAIReportSchema } from "./schema";
 
 export const generateAiReport = async ({ month }: generateAIReportSchema) => {
+  const currentYear = new Date().getFullYear();
   generateAIReportSchema.parse({ month });
   const { userId } = await auth();
   if (!userId) {
@@ -19,8 +20,8 @@ export const generateAiReport = async ({ month }: generateAIReportSchema) => {
   const transactions = await db.transaction.findMany({
     where: {
       date: {
-        gte: new Date(`2024-${month}-01`),
-        lt: new Date(`2024-${month}-31`),
+        gte: new Date(`${currentYear}-${month}-01`),
+        lt: new Date(`${currentYear}-${month}-31`),
       },
     },
   });
